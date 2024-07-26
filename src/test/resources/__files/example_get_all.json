@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1",
+    "slug": "tech-slug",
+    "name": "Tech Name",
+    "content": "Tech Content",
+    "description": "Tech Description",
+    "author": "Tech Author"
+  },
+  {
+    "id": "2",
+    "slug": "tech-slug2",
+    "name": "Tech Name2",
+    "content": "Tech Content2",
+    "description": "Tech Description2",
+    "author": "Tech Author2"
+  }
+]
