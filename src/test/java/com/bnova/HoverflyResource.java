@@ -36,6 +36,23 @@ public class HoverflyResource implements QuarkusTestResourceLifecycleManager
 								.willReturn(success(
 										"{\"message\":\"test\"}",
 										"application/json"))
+
+								.get("/techhub")
+								.willReturn(success(
+										"[{\"id\":\"1\",\"slug\":\"tech-slug\",\"name\":\"Tech Name\",\"content\":\"Tech Content\",\"description\":\"Tech Description\",\"author\":\"Tech Author\"},{\"id\":\"2\",\"slug\":\"tech-slug2\",\"name\":\"Tech Name2\",\"content\":\"Tech Content2\",\"description\":\"Tech Description2\",\"author\":\"Tech Author2\"}]",
+										"application/json"))
+
+								.post("/techhub")
+								.body("{\"slug\":\"new-slug\",\"name\":\"New Tech Name\",\"content\":\"New Tech Content\",\"description\":\"New Tech Description\",\"author\":\"New Tech Author\"}")
+								.willReturn(success(
+										"{\"id\":\"2\",\"slug\":\"new-slug\",\"name\":\"New Tech Name\",\"content\":\"New Tech Content\",\"description\":\"New Tech Description\",\"author\":\"New Tech Author\"}",
+										"application/json"))
+
+								.put("/techhub/1")
+								.body("{\"id\":\"1\",\"slug\":\"updated-slug\",\"name\":\"Updated Tech Name\",\"content\":\"Updated Tech Content\",\"description\":\"Updated Tech Description\",\"author\":\"Updated Tech Author\"}")
+								.willReturn(success(
+										"{\"id\":\"1\",\"slug\":\"updated-slug\",\"name\":\"Updated Tech Name\",\"content\":\"Updated Tech Content\",\"description\":\"Updated Tech Description\",\"author\":\"Updated Tech Author\"}",
+										"application/json"))
 				));
 		return null;
 	}
