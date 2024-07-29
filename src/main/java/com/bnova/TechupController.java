@@ -22,15 +22,15 @@ public class TechupController
 
 	@GET
 	@Path("/{id}")
-	@Produces("application/json")
-	public Techup id(@PathParam("id") String id)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Techup getTechupById(@PathParam("id") String id)
 	{
 		return restClient.getById(id);
 	}
 
 	@GET
 	@Path("/test")
-	@Produces("application/json")
+	@Produces(MediaType.APPLICATION_JSON)
 	public String test()
 	{
 		var techup = new Techup();

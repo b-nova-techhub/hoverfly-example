@@ -20,12 +20,12 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 public interface BnovaRestClient
 {
 	@GET
-	@Produces("application/json")
+	@Produces(MediaType.APPLICATION_JSON)
 	Techup getById(@QueryParam("id") String id);
 
 	@GET
 	@Path("/test")
-	@Produces("application/json")
+	@Produces(MediaType.APPLICATION_JSON)
 	String getTest();
 
 	@GET

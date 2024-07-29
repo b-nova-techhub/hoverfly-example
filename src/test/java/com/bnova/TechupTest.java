@@ -2,6 +2,7 @@ package com.bnova;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
+import jakarta.ws.rs.core.MediaType;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,7 @@ public class TechupTest
 				.get("/techhub/{id}")
 				.then()
 				.statusCode(200)
-				.contentType("application/json")
+				.contentType(MediaType.APPLICATION_JSON)
 				.body("id", is("1"))
 				.body("slug", is("tech-slug"))
 				.body("name", is("Tech Name"))
@@ -50,7 +51,7 @@ public class TechupTest
 				.get("/techhub")
 				.then()
 				.statusCode(200)
-				.contentType("application/json")
+				.contentType(MediaType.APPLICATION_JSON)
 				.body("[0].id", is("1"))
 				.body("[0].slug", is("tech-slug"))
 				.body("[0].name", is("Tech Name"))
@@ -72,12 +73,12 @@ public class TechupTest
 
 		given()
 				.body(requestBody)
-				.header("Content-Type", "application/json")
+				.header("Content-Type", MediaType.APPLICATION_JSON)
 				.when()
 				.post("/techhub")
 				.then()
 				.statusCode(200)
-				.contentType("application/json")
+				.contentType(MediaType.APPLICATION_JSON)
 				.body("id", is("2"))
 				.body("slug", is("new-slug"))
 				.body("name", is("New Tech Name"))
@@ -93,13 +94,13 @@ public class TechupTest
 
 		given()
 				.body(requestBody)
-				.header("Content-Type", "application/json")
+				.header("Content-Type", MediaType.APPLICATION_JSON)
 				.pathParam("id", "1")
 				.when()
 				.put("/techhub/{id}")
 				.then()
 				.statusCode(200)
-				.contentType("application/json")
+				.contentType(MediaType.APPLICATION_JSON)
 				.body("id", is("1"))
 				.body("slug", is("updated-slug"))
 				.body("name", is("Updated Tech Name"))
