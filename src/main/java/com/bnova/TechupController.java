@@ -27,22 +27,7 @@ public class TechupController
 	{
 		return restClient.getById(id);
 	}
-
-	@GET
-	@Path("/test")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String test()
-	{
-		var techup = new Techup();
-		techup.setId("1");
-		techup.setSlug("tech-slug");
-		techup.setName("Tech Name");
-		techup.setAuthor("Tech Author");
-		techup.setContent("Tech Content");
-
-		return "{\"message\":\"test\"}";
-	}
-
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Techup> getAll()

@@ -1,17 +1,20 @@
-package com.bnova;
+package com.bnova.simulate;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
-import jakarta.ws.rs.core.MediaType;
+import io.quarkus.test.junit.TestProfile;
 
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.hamcrest.CoreMatchers.is;
 
 
+
 @QuarkusTest
-@QuarkusTestResource(value = HoverflyResource.class)
+@QuarkusTestResource(value = com.bnova.hoverfly.HoverflyResource.class)
+@TestProfile(SimulateTestProfile.class)
 public class TechupTest
 {
 
@@ -24,7 +27,7 @@ public class TechupTest
 				.get("/techhub/{id}")
 				.then()
 				.statusCode(200)
-				.contentType(MediaType.APPLICATION_JSON)
+				.contentType(APPLICATION_JSON)
 				.body("id", is("1"))
 				.body("slug", is("tech-slug"))
 				.body("name", is("Tech Name"))
@@ -32,17 +35,7 @@ public class TechupTest
 				.body("description", is("Tech Description"))
 				.body("author", is("Tech Author"));
 	}
-
-	@Test
-	void testGetTest()
-	{
-		given()
-				.when().get("/techhub/test")
-				.then()
-				.statusCode(200)
-				.body("message", is("test"));
-	}
-
+	
 	@Test
 	void testGetAll()
 	{
@@ -51,7 +44,7 @@ public class TechupTest
 				.get("/techhub")
 				.then()
 				.statusCode(200)
-				.contentType(MediaType.APPLICATION_JSON)
+				.contentType(APPLICATION_JSON)
 				.body("[0].id", is("1"))
 				.body("[0].slug", is("tech-slug"))
 				.body("[0].name", is("Tech Name"))
@@ -73,12 +66,12 @@ public class TechupTest
 
 		given()
 				.body(requestBody)
-				.header("Content-Type", MediaType.APPLICATION_JSON)
+				.header("Content-Type", APPLICATION_JSON)
 				.when()
 				.post("/techhub")
 				.then()
 				.statusCode(200)
-				.contentType(MediaType.APPLICATION_JSON)
+				.contentType(APPLICATION_JSON)
 				.body("id", is("2"))
 				.body("slug", is("new-slug"))
 				.body("name", is("New Tech Name"))
@@ -94,13 +87,13 @@ public class TechupTest
 
 		given()
 				.body(requestBody)
-				.header("Content-Type", MediaType.APPLICATION_JSON)
+				.header("Content-Type", APPLICATION_JSON)
 				.pathParam("id", "1")
 				.when()
 				.put("/techhub/{id}")
 				.then()
 				.statusCode(200)
-				.contentType(MediaType.APPLICATION_JSON)
+				.contentType(APPLICATION_JSON)
 				.body("id", is("1"))
 				.body("slug", is("updated-slug"))
 				.body("name", is("Updated Tech Name"))

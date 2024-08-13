@@ -2,15 +2,18 @@ package com.bnova.capture;
 
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.TestProfile;
 
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.hamcrest.CoreMatchers.is;
 
 
 @QuarkusTest
-@QuarkusTestResource(value = com.bnova.capture.HoverflyCaptureResource.class)
+@QuarkusTestResource(value = com.bnova.hoverfly.HoverflyResource.class)
+@TestProfile(CaptureTestProfile.class)
 public class PostCaptureTest
 {
 	@Test
@@ -22,7 +25,7 @@ public class PostCaptureTest
 				.get("/posts/{id}")
 				.then()
 				.statusCode(200)
-				.contentType("application/json")
+				.contentType(APPLICATION_JSON)
 				.body("id", is(1))
 				.body("userId", is(1))
 				.body("title", is("sunt aut facere repellat provident occaecati excepturi optio reprehenderit"))
